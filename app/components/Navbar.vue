@@ -48,7 +48,9 @@ watch(() => route.path, () => {
 
         <!-- menu button  -->
         <Button variant="outline" @click="toogleMenu"  class="cursor-pointer md:hidden block">
-            <Icon name="lucide:menu" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.633h16.5M3.75 12h16.5m-16.5 5.367h16.5" />
+            </svg>
         </Button>
 
         <div v-if="isOpen" class="md:hidden fixed inset-0 z-50 bg-black/50 transition-opacity duration-300"
@@ -61,8 +63,10 @@ watch(() => route.path, () => {
                         <img :src="logo" class="h-8 w-fit" alt="Logo" />
                         <span class="text-lg font-bold">COMMERCECORE</span>
                     </div>
-                    <Button variant="ghost" @click="isOpen = false" aria-label="Close menu">
-                        <Icon name="lucide:x" />
+                    <Button class="cursor-pointer" variant="ghost" @click="isOpen = false" aria-label="Close menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
                     </Button>
                 </div>
 
