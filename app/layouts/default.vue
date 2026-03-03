@@ -1,5 +1,5 @@
 <template>
-    <div class="py-4 px-20 bg-gray-200 h-screen font-brand">
+    <div class="py-4 md:px-20 px-2 bg-gray-200 h-screen font-brand">
         <Navbar />
 
         <main>
