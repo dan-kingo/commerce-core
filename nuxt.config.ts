@@ -20,4 +20,5 @@ export default defineNuxtConfig({
   fonts: {
     families: [{ name: "Outfit", provider: "google" }],
   },
+  css: ["@/assets/css/tailwind.css"],
 });
