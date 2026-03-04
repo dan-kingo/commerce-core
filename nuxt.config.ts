@@ -27,4 +27,9 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  app: {
+    head: {
+      title: "Commerce-Core | a multitenant commerce platform ", 
+    },
+  },
 });
