@@ -21,4 +21,10 @@ export default defineNuxtConfig({
     families: [{ name: "Outfit", provider: "google" }],
   },
   css: ["@/assets/css/tailwind.css"],
+  components: [
+    {
+      path: "~/components",
+      pathPrefix: false,
+    },
+  ],
 });
