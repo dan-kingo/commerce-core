@@ -13,7 +13,7 @@ import dashboard from "~/assets/img/dashboard.jpg"
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand/10 rounded-full blur-3xl"></div>
 
         <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 ">
 
                 <!-- LEFT: Text content – aligned left -->
                 <div class="text-left space-y-8">
@@ -33,10 +33,10 @@ import dashboard from "~/assets/img/dashboard.jpg"
                     <!-- Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 mt-10">
                         <Button
-                            class="bg-brand hover:bg-brand-hover text-white px-6 py-3 rounded-md cursor-pointer w-full sm:w-auto"
+                            class="bg-brand hover:bg-brand-hover text-white px-6 py-6 rounded-md cursor-pointer w-full sm:w-auto"
                             @click="$router.push('/signup')">View Demo</Button>
                         <Button variant="ghost"
-                            class="px-6 py-3 rounded-md border-2 border-brand text-brand cursor-pointer w-full sm:w-auto"
+                            class="px-6 py-6 rounded-md border-2 border-brand text-brand cursor-pointer w-full sm:w-auto"
                             @click="$router.push('/learn-more')">Learn More</Button>
                     </div>
                 </div>

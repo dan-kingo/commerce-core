@@ -13,6 +13,28 @@ const toogleMenu = () => {
 }
 const route = useRoute()
 
+const isSectionLink = (path: string) => !path.startsWith('/')
+const normalizeHash = (path: string) => (path.startsWith('#') ? path : `#${path}`)
+
+const resolveLink = (path: string) => {
+    if (isSectionLink(path)) {
+        return {
+            path: route.path,
+            hash: normalizeHash(path)
+        }
+    }
+
+    return path
+}
+
+const isActiveLink = (path: string) => {
+    if (isSectionLink(path)) {
+        return route.hash === normalizeHash(path)
+    }
+
+    return route.path === path
+}
+
 onMounted(() => {
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -28,7 +50,7 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-    <nav class="sticky top-0 z-40 flex justify-between py-3 mb-12 transition-colors duration-300 -mx-2  px-2 md:px-12"
+    <nav class="sticky top-0 z-40 flex justify-between py-3 mb-6 transition-colors duration-300   px-2 md:px-12"
         :class="isScrolled ? 'bg-gray-100' : 'bg-transparent'">
 
         <!-- left side  -->
@@ -43,10 +65,10 @@ watch(() => route.path, () => {
         <div class=" hidden md:flex items-center">
             <ul class="flex space-x-8">
                 <li v-for="link in navLinks" :key="link.name">
-                    <NuxtLink :to="link.path"
+                    <NuxtLink :to="resolveLink(link.path)"
                         class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200"
                         :class="{
-                            'text-indigo-500 bg-gray-200': $route.path === link.path
+                            'text-brand bg-gray-200 font-semibold': isActiveLink(link.path)
                         }">
                         {{ link.name }}
                     </NuxtLink>
@@ -95,10 +117,10 @@ watch(() => route.path, () => {
 
                 <!-- Mobile nav links -->
                 <div class="flex flex-col px-5 py-8 gap-2">
-                    <NuxtLink v-for="link in navLinks" :key="link.path" :to="link.path"
+                    <NuxtLink v-for="link in navLinks" :key="link.path" :to="resolveLink(link.path)"
                         class="py-3 px-5 text-lg text-gray-700 hover:text-indigo-500 hover:bg-gray-100 rounded-lg transition-colors duration-200"
                         :class="{
-                            'text-indigo-500 bg-gray-100 font-medium': route.path === link.path
+                            'text-brand bg-gray-100 font-semibold': isActiveLink(link.path)
                         }" @click="isOpen = false">
                         {{ link.name }}
                     </NuxtLink>
