@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
     <section id="pricing" class="px-4 py-16 md:py-20">
         <div class="mx-auto max-w-6xl">

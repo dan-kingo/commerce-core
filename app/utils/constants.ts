@@ -8,6 +8,11 @@ interface PricingPlan {
   badge?: string;
 }
 
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 const plans: PricingPlan[] = [
   {
     name: "Starter",
@@ -65,8 +70,8 @@ const navLinks = [
     path: "marketplace",
   },
   {
-    name: "Resources",
-    path: "resources",
+    name: "Faqs",
+    path: "faq",
   },
 ];
 
@@ -94,4 +99,32 @@ const featureCards = [
   },
 ];
 
-export { navLinks, featureCards,plans };
+const faqs: FaqItem[] = [
+  {
+    question: "How quickly can I launch my store?",
+    answer:
+      "Most teams launch their first storefront in days, not weeks, using our prebuilt sections and integrations.",
+  },
+  {
+    question: "Can I connect my existing payment gateways?",
+    answer:
+      "Yes. You can connect popular payment providers and manage checkout options from a single dashboard.",
+  },
+  {
+    question: "Is this suitable for international selling?",
+    answer:
+      "Absolutely. You can run multi-region storefronts with localized experiences, currencies, and performance delivery.",
+  },
+  {
+    question: "Do you provide analytics and reporting?",
+    answer:
+      "You get built-in analytics for sales, conversion, and customer behavior, plus export options for deeper reporting.",
+  },
+  {
+    question: "Can I upgrade or downgrade plans later?",
+    answer:
+      "Yes. Plans are flexible, and you can move between tiers as your business requirements change.",
+  },
+];
+
+export { navLinks, featureCards, plans, faqs };

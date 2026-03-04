@@ -4,5 +4,6 @@
         <Feature />
         <Marketplace />
         <Pricing />
+        <Faq />
     </div>
 </template>
