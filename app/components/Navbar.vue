@@ -64,15 +64,17 @@ watch(() => route.path, () => {
         <!-- middle one -->
         <div class=" hidden md:flex items-center">
             <ul class="flex space-x-8">
-                <li v-for="link in navLinks" :key="link.name">
-                    <NuxtLink :to="resolveLink(link.path)"
-                        class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200"
-                        :class="{
-                            'text-brand bg-gray-200 font-semibold': isActiveLink(link.path)
-                        }">
-                        {{ link.name }}
-                    </NuxtLink>
-                </li>
+                <ClientOnly>
+                    <li v-for="link in navLinks" :key="link.name">
+                        <NuxtLink :to="resolveLink(link.path)"
+                            class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200"
+                            :class="{
+                                'text-brand bg-gray-200 font-semibold': isActiveLink(link.path)
+                            }">
+                            {{ link.name }}
+                        </NuxtLink>
+                    </li>
+                </ClientOnly>
             </ul>
         </div>
 
