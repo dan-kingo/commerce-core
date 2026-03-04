@@ -42,6 +42,8 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-button: var(--button);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
 }
 
 :root {
@@ -78,6 +80,8 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --button: #00DC82;
+  --brand: #4f46e5;
+  --brand-hover: #4338ca;
 }
 
 .dark {
@@ -118,6 +122,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

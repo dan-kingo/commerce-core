@@ -18,7 +18,7 @@ watch(() => route.path, () => {
         <!-- left side  -->
         <div class="flex flex-1 justify-start">
             <NuxtLink to="/" class="flex items-center">
-                <img :src="logo" class="w-fit h-8"/>
+                <img :src="logo" class="w-fit h-8" />
                 <span class="text-xl font-bold ">COMMERCECORE</span>
             </NuxtLink>
         </div>
@@ -27,7 +27,8 @@ watch(() => route.path, () => {
         <div class=" hidden md:flex items-center">
             <ul class="flex space-x-8">
                 <li v-for="link in navLinks" :key="link.name">
-                    <NuxtLink :to="link.path" class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200"
+                    <NuxtLink :to="link.path"
+                        class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200"
                         :class="{
                             'text-indigo-500 bg-gray-200': $route.path === link.path
                         }">
@@ -41,15 +42,20 @@ watch(() => route.path, () => {
 
         <div class="hidden md:flex flex-1 justify-end">
             <div class="flex gap-2 items-center">
-                <NuxtLink to="/login" class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200">Login</NuxtLink>
-                <Button class="bg-indigo-600 hover:bg-indigo-700 text-white mr-2 cursor-pointer" @click="$router.push('/signup')">Start Free Trial</Button>
+                <NuxtLink to="/login"
+                    class="text-gray-600 hover:text-indigo-500 transition-colors duration-200 px-3 py-1.5 rounded-md hover:bg-gray-200">
+                    Login</NuxtLink>
+                <Button class="bg-brand hover:bg-brand-hover text-white mr-2 cursor-pointer"
+                    @click="$router.push('/signup')">Start Free Trial</Button>
             </div>
         </div>
 
         <!-- menu button  -->
-        <Button variant="outline" @click="toogleMenu"  class="cursor-pointer md:hidden block">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.633h16.5M3.75 12h16.5m-16.5 5.367h16.5" />
+        <Button variant="outline" @click="toogleMenu" class="cursor-pointer md:hidden block">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M3.75 6.633h16.5M3.75 12h16.5m-16.5 5.367h16.5" />
             </svg>
         </Button>
 
@@ -64,7 +70,8 @@ watch(() => route.path, () => {
                         <span class="text-lg font-bold">COMMERCECORE</span>
                     </div>
                     <Button class="cursor-pointer" variant="ghost" @click="isOpen = false" aria-label="Close menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
+                            stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </Button>
@@ -87,14 +94,14 @@ watch(() => route.path, () => {
                             @click="isOpen = false">
                             Login
                         </NuxtLink>
-                        <Button class="cursor-pointer bg-indigo-600 hover:bg-indigo-700" size="lg" block
+                        <Button class="cursor-pointer bg-brand hover:bg-brand-hover" size="lg" block
                             @click="$router.push('/signup'); isOpen = false">
                             Start Free Trial
                         </Button>
                     </div>
-                    </div>
                 </div>
-                </div>
-                
+            </div>
+        </div>
+
     </nav>
 </template>
