@@ -3,5 +3,6 @@
         <Hero />
         <Feature />
         <Marketplace />
+        <Pricing />
     </div>
 </template>
