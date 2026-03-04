@@ -1,8 +1,9 @@
 <template>
-    <div class="py-4 md:px-20 px-2 bg-gray-200 min-h-screen font-brand">
-        <Navbar />
+    <div class="py-4  px-2 bg-gray-200 min-h-screen font-brand">
+        
+            <Navbar />
 
-        <main>
+        <main class="md:px-20">
             <slot />
         </main>
     </div>

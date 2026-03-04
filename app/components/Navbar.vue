@@ -2,10 +2,25 @@
 import logo from '~/assets/img/logo.png'
 
 const isOpen = ref(false)
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 12
+}
+
 const toogleMenu = () => {
     isOpen.value = !isOpen.value
 }
 const route = useRoute()
+
+onMounted(() => {
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+    window.removeEventListener('scroll', handleScroll)
+})
 
 watch(() => route.path, () => {
     isOpen.value = false
@@ -13,7 +28,8 @@ watch(() => route.path, () => {
 </script>
 
 <template>
-    <nav class="flex justify-between px-2  py-3 rounded-xl bg-gray-100 mb-12">
+    <nav class="sticky top-0 z-40 flex justify-between py-3 mb-12 transition-colors duration-300 -mx-2  px-2 md:px-12"
+        :class="isScrolled ? 'bg-gray-100' : 'bg-transparent'">
 
         <!-- left side  -->
         <div class="flex flex-1 justify-start">
