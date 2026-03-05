@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/fonts",
     "@pinia/nuxt",
+    "nuxt-toast",
   ],
   shadcn: {
     /**
@@ -43,4 +44,11 @@ export default defineNuxtConfig({
       apiBase: "https://bellytalk.onrender.com/api",
     },
   },
+
+  toast : {
+    settings : {
+      timeout : 3000,
+      position : "topRight"
+    }
+  }
 });

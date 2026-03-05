@@ -5,6 +5,7 @@ import { loginSchema } from '@/validations/auth.schema'
 import { useAuth } from '@/composables/useAuth'
 
 const auth = useAuth()
+const toast = useToast()
 
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: toTypedSchema(loginSchema)
@@ -16,14 +17,12 @@ const [password] = defineField('password')
 const onSubmit = handleSubmit(async (values) => {
   try {
     await auth.login(values)
+    toast.success({ message: 'Logged in successfully!' })
     await navigateTo('/dashboard')
   } catch (error: any) {
-    const message =
-      error?.data?.message ||
-      error?.data?.error ||
-      error?.message ||
-      'Login failed. Please try again.'
-    alert(message)
+    const message = error?.data?.message || error?.data?.error || error?.message || error?.message || 'Login failed. Please try again.'
+    console.error('Login error:', error)
+    toast.error({message: message})
   }
 })
 
