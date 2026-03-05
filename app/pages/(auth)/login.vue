@@ -1,4 +1,22 @@
 <script setup lang="ts">
+import { useForm } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import { loginSchema } from '@/validations/auth.schema'
+import { useAuth } from '@/composables/useAuth'
+
+const auth = useAuth()
+
+const { handleSubmit, errors, defineField } = useForm({
+  validationSchema: toTypedSchema(loginSchema)
+})
+
+const [email] = defineField('email')
+const [password] = defineField('password')
+
+const onSubmit = handleSubmit(async (values) => {
+  await auth.login(values)
+})
+
 definePageMeta({
   layout: 'auth',
 })
@@ -19,11 +37,12 @@ definePageMeta({
       </CardAction>
     </CardHeader>
     <CardContent>
-      <form>
+      <form @submit.prevent="onSubmit">
         <div class="grid w-full items-center gap-4">
           <div class="flex flex-col space-y-1.5">
             <Label for="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" />
+            <Input id="email" name="email" v-model="email" type="email" placeholder="m@example.com" />
+            <span class="text-red-500">{{ errors.email }}</span>
           </div>
           <div class="flex flex-col space-y-1.5">
             <div class="flex items-center">
@@ -32,16 +51,14 @@ definePageMeta({
                 Forgot your password?
               </NuxtLink>
             </div>
-            <Input id="password" type="password" placeholder="Enter your password" />
+            <Input id="password" name="password" v-model="password" type="password" placeholder="Enter your password" />
+            <span class="text-red-500">{{ errors.password }}</span>
           </div>
+          <Button class="w-full cursor-pointer bg-brand text-white hover:bg-brand/90" type="submit">
+            Login
+          </Button>
         </div>
       </form>
     </CardContent>
-    <CardFooter class="flex flex-col gap-2">
-      <Button class="w-full cursor-pointer bg-brand text-white hover:bg-brand/90">
-        Login
-      </Button>
-      
-    </CardFooter>
   </Card>
 </template>

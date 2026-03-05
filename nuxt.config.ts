@@ -2,7 +2,13 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@nuxt/icon", "@nuxt/fonts"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "shadcn-nuxt",
+    "@nuxt/icon",
+    "@nuxt/fonts",
+    "@pinia/nuxt",
+  ],
   shadcn: {
     /**
      * Prefix for all the imported component.
@@ -30,6 +36,11 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Commerce-Core | a multitenant commerce platform ", 
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiBase: ''
     },
   },
 });
