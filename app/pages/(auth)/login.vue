@@ -15,6 +15,7 @@ const [password] = defineField('password')
 
 const onSubmit = handleSubmit(async (values) => {
   await auth.login(values)
+  navigateTo('/dashboard')
 })
 
 definePageMeta({

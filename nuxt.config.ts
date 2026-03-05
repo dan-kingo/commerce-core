@@ -35,12 +35,12 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: "Commerce-Core | a multitenant commerce platform ", 
+      title: "Commerce-Core | a multitenant commerce platform ",
     },
   },
   runtimeConfig: {
     public: {
-      apiBase: ''
+      apiBase: "https://bellytalk.onrender.com/api",
     },
   },
 });

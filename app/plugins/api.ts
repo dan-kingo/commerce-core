@@ -1,4 +1,4 @@
-export const useHttp = () => {
+export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const auth = useAuthStore();
 
@@ -21,6 +21,5 @@ export const useHttp = () => {
       }
     },
   });
-
-  return api;
-};
+    return { provide: { api } };
+});

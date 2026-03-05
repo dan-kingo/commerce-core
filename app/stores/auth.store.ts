@@ -14,11 +14,15 @@ export const useAuthStore = defineStore("auth", {
     async login(payload: LoginInput) {
       this.isLoading = true;
       try {
-        const res : any = await authService.login(payload);
+        const res: any = await authService.login(payload);
 
-        this.accessToken = res.accessToken;
-        this.refreshToken = res.refreshToken;
-        this.user = res.user;
+        if (!res?.session) {
+          throw new Error("Login response does not include a session.");
+        }
+
+        this.accessToken = res.session.access_token;
+        this.refreshToken = res.session.refresh_token;
+        this.user = res.session.user;
       } finally {
         this.isLoading = false;
       }
@@ -27,11 +31,15 @@ export const useAuthStore = defineStore("auth", {
     async register(payload: RegisterInput) {
       this.isLoading = true;
       try {
-        const res : any = await authService.register(payload);
+        const res: any = await authService.register(payload);
 
-        this.accessToken = res.accessToken;
-        this.refreshToken = res.refreshToken;
-        this.user = res.user;
+        if (!res?.session) {
+          throw new Error("Register response does not include a session.");
+        }
+
+        this.accessToken = res.session.access_token;
+        this.refreshToken = res.session.refresh_token;
+        this.user = res.session.user;
       } finally {
         this.isLoading = false;
       }
