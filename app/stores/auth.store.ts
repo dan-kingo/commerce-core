@@ -3,12 +3,24 @@ import { authService } from "~/services/auth.service";
 import type { LoginInput, RegisterInput } from "~/validations/auth.schema";
 
 export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    user: null as null | Record<string, any>,
-    accessToken: null as string | null,
-    refreshToken: null as string | null,
-    isLoading: false,
-  }),
+  state: () => {
+    const userCookie = useCookie<Record<string, any> | null>("auth_user", {
+      default: () => null,
+    });
+    const accessTokenCookie = useCookie<string | null>("access_token", {
+      default: () => null,
+    });
+    const refreshTokenCookie = useCookie<string | null>("refresh_token", {
+      default: () => null,
+    });
+
+    return {
+      user: userCookie.value,
+      accessToken: accessTokenCookie.value,
+      refreshToken: refreshTokenCookie.value,
+      isLoading: false,
+    };
+  },
 
   actions: {
     async login(payload: LoginInput) {
@@ -23,6 +35,10 @@ export const useAuthStore = defineStore("auth", {
         this.accessToken = res.session.access_token;
         this.refreshToken = res.session.refresh_token;
         this.user = res.session.user;
+
+        useCookie<string | null>("access_token").value = this.accessToken;
+        useCookie<string | null>("refresh_token").value = this.refreshToken;
+        useCookie<Record<string, any> | null>("auth_user").value = this.user;
       } finally {
         this.isLoading = false;
       }
@@ -40,6 +56,10 @@ export const useAuthStore = defineStore("auth", {
         this.accessToken = res.session.access_token;
         this.refreshToken = res.session.refresh_token;
         this.user = res.session.user;
+
+        useCookie<string | null>("access_token").value = this.accessToken;
+        useCookie<string | null>("refresh_token").value = this.refreshToken;
+        useCookie<Record<string, any> | null>("auth_user").value = this.user;
       } finally {
         this.isLoading = false;
       }
@@ -49,7 +69,12 @@ export const useAuthStore = defineStore("auth", {
       this.user = null;
       this.accessToken = null;
       this.refreshToken = null;
-      navigateTo("/auth/login");
+
+      useCookie<string | null>("access_token").value = null;
+      useCookie<string | null>("refresh_token").value = null;
+      useCookie<Record<string, any> | null>("auth_user").value = null;
+
+      navigateTo("/login");
     },
   },
 });

@@ -15,11 +15,22 @@ export default defineNuxtPlugin(() => {
       options.headers = headers;
     },
 
-    onResponseError({ response }) {
-      if (response.status === 401) {
+    onResponseError({ request, response }) {
+      const requestPath =
+        typeof request === "string"
+          ? request
+          : request instanceof Request
+            ? request.url
+            : "";
+
+      const isAuthRequest =
+        requestPath.includes("/auth/login") ||
+        requestPath.includes("/auth/register");
+
+      if (response.status === 401 && auth.accessToken && !isAuthRequest) {
         auth.logout();
       }
     },
   });
-    return { provide: { api } };
+  return { provide: { api } };
 });

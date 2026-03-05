@@ -14,8 +14,17 @@ const [email] = defineField('email')
 const [password] = defineField('password')
 
 const onSubmit = handleSubmit(async (values) => {
-  await auth.login(values)
-  navigateTo('/dashboard')
+  try {
+    await auth.login(values)
+    await navigateTo('/dashboard')
+  } catch (error: any) {
+    const message =
+      error?.data?.message ||
+      error?.data?.error ||
+      error?.message ||
+      'Login failed. Please try again.'
+    alert(message)
+  }
 })
 
 definePageMeta({
