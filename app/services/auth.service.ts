@@ -1,4 +1,5 @@
 import type { LoginInput, RegisterInput } from "~/validations/auth.schema";
+import type { ProfileData } from "~/utils/constants";
 
 export const authService = {
   async login(payload: LoginInput) {
@@ -15,5 +16,10 @@ export const authService = {
       method: "POST",
       body: payload,
     });
+  },
+
+  async getMe() {
+    const { $api } = useNuxtApp();
+    return await $api<{ profile: ProfileData }>("/profile/me");
   },
 };

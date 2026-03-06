@@ -23,6 +23,17 @@ export const useAuthStore = defineStore("auth", {
   },
 
   actions: {
+    async hydrateUserProfile() {
+      try {
+        const { profile } = await authService.getMe();
+        this.user = {
+          ...(this.user ?? {}),
+          ...profile,
+        };
+        useCookie<Record<string, any> | null>("auth_user").value = this.user;
+      } catch {}
+    },
+
     async login(payload: LoginInput) {
       this.isLoading = true;
       try {
@@ -35,6 +46,8 @@ export const useAuthStore = defineStore("auth", {
         this.accessToken = res.session.access_token;
         this.refreshToken = res.session.refresh_token;
         this.user = res.session.user;
+
+        await this.hydrateUserProfile();
 
         useCookie<string | null>("access_token").value = this.accessToken;
         useCookie<string | null>("refresh_token").value = this.refreshToken;
@@ -56,6 +69,8 @@ export const useAuthStore = defineStore("auth", {
         this.accessToken = res.session.access_token;
         this.refreshToken = res.session.refresh_token;
         this.user = res.session.user;
+
+        await this.hydrateUserProfile();
 
         useCookie<string | null>("access_token").value = this.accessToken;
         useCookie<string | null>("refresh_token").value = this.refreshToken;

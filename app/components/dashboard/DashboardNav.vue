@@ -2,7 +2,6 @@
 import logo from '~/assets/img/logo.png'
 import { useAuth } from '@/composables/useAuth'
 const isScrolled = ref(false)
-
 const handleScroll = () => {
     isScrolled.value = window.scrollY > 12
 }
@@ -13,7 +12,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
     window.removeEventListener('scroll', handleScroll)
 })
-
 const { user, logout } = useAuth()
 </script>
 <template>
@@ -26,9 +24,12 @@ const { user, logout } = useAuth()
             </NuxtLink>
         </div>
         <div class="flex gap-4 items-center">
-            <p class="hidden md:block">{{ user?.name  || 'Guest' }}</p>
-            <Badge class="hidden md:block" variant="destructive">{{ user?.role }}</Badge>
-            <Button variant="outline" size="sm" @click="logout"><Icon name="lucide:log-out"/></Button>
+            <p class="hidden md:block">{{ user?.full_name || user?.email || 'Guest' }}</p>
+            <Badge class="hidden md:block text-brand/70 bg-brand/20" variant="outline">{{ user?.role || 'user' }}
+            </Badge>
+            <Button class="cursor-pointer" variant="outline" size="sm" @click="logout">
+                <Icon name="lucide:log-out" />
+            </Button>
         </div>
     </nav>
 </template>

@@ -13,6 +13,10 @@ interface FaqItem {
   answer: string;
 }
 
+export interface ProfileData {
+  full_name: string;
+  role: string;
+}
 const plans: PricingPlan[] = [
   {
     name: "Starter",
