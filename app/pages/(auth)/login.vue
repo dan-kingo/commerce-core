@@ -6,7 +6,6 @@ import { useAuth } from '@/composables/useAuth'
 
 const auth = useAuth()
 const toast = useToast()
-
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: toTypedSchema(loginSchema)
 })
@@ -16,13 +15,14 @@ const [password] = defineField('password')
 
 const onSubmit = handleSubmit(async (values) => {
   try {
-    await auth.login(values)
+  await auth.login(values)
     toast.success({ message: 'Logged in successfully!' })
     await navigateTo('/dashboard')
   } catch (error: any) {
     const message = error?.data?.message || error?.data?.error || error?.message || error?.message || 'Login failed. Please try again.'
     console.error('Login error:', error)
-    toast.error({message: message})
+    toast.error({message: message
+    })
   }
 })
 
@@ -66,6 +66,10 @@ definePageMeta({
           <Button class="w-full cursor-pointer bg-brand text-white hover:bg-brand/90" type="submit">
             Login
           </Button>
+          <Button v-if="!auth.isLoading"  class="w-full cursor-pointer bg-brand text-white hover:bg-brand/90" type="submit" >
+            <Icon name="lucide:loader-circle" class="animate-spin"/>
+          </Button>
+
         </div>
       </form>
     </CardContent>
