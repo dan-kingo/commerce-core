@@ -130,3 +130,6 @@
 html {
   scroll-behavior: smooth;
 }
+.router-link-active {
+  @apply text-brand bg-brand/20;
+}

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { UserCircle2 } from 'lucide-vue-next';
 import logo from '~/assets/img/logo.png'
-
+import {useAuth} from "~/composables/useAuth";
 const route = useRoute()
 const isActive = (to: string) =>
     route.path === to || route.path.startsWith(`${to}/`)
+
+    const { user } = useAuth()
 </script>
 
 <template>
@@ -46,8 +48,8 @@ const isActive = (to: string) =>
                     <SidebarMenuButton>
                         <UserCircle2 class="size-4" />
                         <div class="group-data-[collapsible=icon]:hidden text-left">
-                            <p class="text-sm font-medium leading-none">Dan</p>
-                            <p class="text-xs text-muted-foreground">dan@example.com</p>
+                            <p class="text-sm font-medium leading-none">{{ user?.full_name }}</p>
+                            <p class="text-xs text-muted-foreground">{{ user?.email }}</p>
                         </div>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
