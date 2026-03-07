@@ -1,3 +1,12 @@
+import {
+  LayoutDashboard,
+  FileText,
+  Hospital,
+  Boxes,
+  ShoppingCart,
+  MessageSquare,
+  UserCircle2,
+} from "lucide-vue-next";
 interface PricingPlan {
   name: string;
   price: string;
@@ -130,5 +139,13 @@ const faqs: FaqItem[] = [
       "Yes. Plans are flexible, and you can move between tiers as your business requirements change.",
   },
 ];
+const menuItems = [
+  { title: "Dashboard", to: "/dashboard", icon: LayoutDashboard },
+  { title: "Content", to: "/dashboard/content", icon: FileText },
+  { title: "Hospital", to: "/dashboard/hospital", icon: Hospital },
+  { title: "Manage Products", to: "/dashboard/manage-products", icon: Boxes },
+  { title: "Manage Order", to: "/dashboard/manage-order", icon: ShoppingCart },
+  { title: "Messages", to: "/dashboard/messages", icon: MessageSquare },
+];
 
-export { navLinks, featureCards, plans, faqs };
+export { navLinks, featureCards, plans, faqs, menuItems };
