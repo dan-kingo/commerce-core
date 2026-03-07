@@ -23,6 +23,21 @@ export const useAuthStore = defineStore("auth", {
   },
 
   actions: {
+    persistAuthState() {
+      useCookie<string | null>("access_token").value = this.accessToken;
+      useCookie<string | null>("refresh_token").value = this.refreshToken;
+      useCookie<Record<string, any> | null>("auth_user").value = this.user;
+    },
+
+    async applySession(session: any) {
+      this.accessToken = session.access_token;
+      this.refreshToken = session.refresh_token;
+      this.user = session.user;
+
+      await this.hydrateUserProfile();
+      this.persistAuthState();
+    },
+
     async hydrateUserProfile() {
       try {
         const { profile } = await authService.getMe();
@@ -30,7 +45,6 @@ export const useAuthStore = defineStore("auth", {
           ...(this.user ?? {}),
           ...profile,
         };
-        useCookie<Record<string, any> | null>("auth_user").value = this.user;
       } catch {}
     },
 
@@ -43,15 +57,7 @@ export const useAuthStore = defineStore("auth", {
           throw new Error("Login response does not include a session.");
         }
 
-        this.accessToken = res.session.access_token;
-        this.refreshToken = res.session.refresh_token;
-        this.user = res.session.user;
-
-        await this.hydrateUserProfile();
-
-        useCookie<string | null>("access_token").value = this.accessToken;
-        useCookie<string | null>("refresh_token").value = this.refreshToken;
-        useCookie<Record<string, any> | null>("auth_user").value = this.user;
+        await this.applySession(res.session);
       } finally {
         this.isLoading = false;
       }
@@ -66,15 +72,7 @@ export const useAuthStore = defineStore("auth", {
           throw new Error("Register response does not include a session.");
         }
 
-        this.accessToken = res.session.access_token;
-        this.refreshToken = res.session.refresh_token;
-        this.user = res.session.user;
-
-        await this.hydrateUserProfile();
-
-        useCookie<string | null>("access_token").value = this.accessToken;
-        useCookie<string | null>("refresh_token").value = this.refreshToken;
-        useCookie<Record<string, any> | null>("auth_user").value = this.user;
+        await this.applySession(res.session);
       } finally {
         this.isLoading = false;
       }
