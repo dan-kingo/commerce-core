@@ -46,7 +46,10 @@ const isActive = (to: string) =>
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton>
-                        <UserCircle2 class="size-4" />
+                       <img v-if="user?.avatar_url" :src="user?.avatar_url" alt="user image" class="size-8 rounded-full bg-muted" />
+                       <div v-else class="size-8 rounded-full bg-brand/30 text-brand/70 flex items-center justify-center font-medium">
+                       {{user?.full_name?.[0]?.toUpperCase() || 'U'}}
+                       </div>
                         <div class="group-data-[collapsible=icon]:hidden text-left">
                             <p class="text-sm font-medium leading-none">{{ user?.full_name }}</p>
                             <p class="text-xs text-muted-foreground">{{ user?.email }}</p>
