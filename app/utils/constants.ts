@@ -147,5 +147,12 @@ const menuItems = [
   { title: "Manage Order", to: "/dashboard/manage-order", icon: ShoppingCart },
   { title: "Messages", to: "/dashboard/messages", icon: MessageSquare },
 ];
+const features = [
+  { icon: "lucide:store", label: "Multi-tenant storefronts" },
+  { icon: "lucide:bar-chart-2", label: "Analytics & insights" },
+  { icon: "lucide:zap", label: "Lightning-fast checkout" },
+  { icon: "lucide:shield-check", label: "Secure by default" },
+];
 
-export { navLinks, featureCards, plans, faqs, menuItems };
+const logos = ["CBE Birr", "Telebirr", "Mpesa", "Chapa"];
+export { navLinks, featureCards, plans, faqs, menuItems, logos, features };
